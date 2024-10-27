@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "7fcfd8ff-90b3-4e98-ae48-1cb157758c9c",
+		"name": "Analyse Code request example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19593119"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/analyse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\":\"def celsius_to_fahrenheit(celsius):     return (celsius * 9/5) + 32  def is_even(number):     return number % 2 == 0  def factorial(n):     if n == 0 or n == 1:         return 1     else:         return n * factorial(n - 1) \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/analyse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"analyse"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
