@@ -1,75 +1,180 @@
-# code-summarizer
+# Code Summarizer
+
+- [English Instructions](#running-the-project)
+- [Документация на Русском](#запуск-проекта)
+
 ## Running the project
 
-## (A) Running the flask api
-#### (1) Running the API using the Llama model from hugging face
+### Requirements
 
-- Before running the API install 
-```
-python = "^3.11"
-flask = "^3.0.3"
-python-dotenv = "^1.0.1"
-poetry
-```
+- `Python 3.11`
 
-- In the ``/back/code_summarizer_api`` directory add a ``.env`` file with the following fields
-```
-API_TOKEN="your hugging face api token"
-API_URL="https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
-```
-- You can get a free hugging face access token from here ``https://huggingface.co/settings/tokens``
-- In the ``/back/code_summarizer_api`` directory install the required dependencies using 
-```
-poetry install
-```
-- Run the APi using 
-```
-poetry run flask run 
-```
-- or
-```
-python app/py
-```
-#### (2) Running the APi with a local model
-- To run the Api and model locally, download the llama 3.2 model files from ``https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct``
-- Make sure you have transformers and pytorch installed:
+> Before starting, install `poetry`
+>
+> ```bash
+> pip install poetry
+> ```
+
+### Install dependencies
+
+Install poetry dependencies using the following command
 
 ```bash
-pip install transformers torch flask
+poetry install
 ```
+
+### (A) Running the Flask API
+
+#### (1) Set API TOKEN for Llama model
+
+- In the `./back` directory add a `.env` file with the following fields
+
+  ```bash
+  API_TOKEN="api token from hugging face"
+  API_URL="https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
+  ```
+
+- You can get a free hugging face access token from here [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+
+- Run the API using
+
+  ```bash
+  poetry run flask run
+  ```
+
+- or
+
+  ```bash
+  python app/py
+  ```
+
+#### (2) Running the API with a local model
+
+- To run the API and model locally, download the llama 3.2 model files from [https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct](https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct)
+- Make sure you have transformers and pytorch installed:
+
+  ```bash
+  poetry add transformers torch flask
+  ```
+
 - To run the model locally make the following change to the model init function
 
-```
-MODEL_NAME = "your_model_name_here"  # Replace with the Hugging Face model name, e.g., "facebook/llama-7b"
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
+  ```bash
+  MODEL_NAME = "your_model_name_here"  # Replace with the Hugging Face model name, e.g., "facebook/llama-7b"
+  tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+  model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
-def query_huggingface(payload):
-    inputs = tokenizer(payload["inputs"], return_tensors="pt")
-    outputs = model.generate(**inputs, max_length=700)
-    result = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return {"generated_text": result}
-```
-- Run the flask app 
-```
-poetry run flask run 
+  def query_huggingface(payload):
+      inputs = tokenizer(payload["inputs"], return_tensors="pt")
+      outputs = model.generate(**inputs, max_length=700)
+      result = tokenizer.decode(outputs[0], skip_special_tokens=True)
+      return {"generated_text": result}
+  ```
+
+- Run the flask app
+
+  ```bash
+  poetry run flask run
+  ```
+
+### (B) Running the streamlite app
+
+- In the `./front` directory add a `.env` with the following fields
+
+  ```bash
+  API_ENDPOINT=http://localhost:5000 # or the flask API url
+  ```
+
+- Run streamlit app
+
+  ```bash
+  streamlit run main.py
+  ```
+
+## Запуск проекта
+
+## Требования
+
+- `Python 3.11`
+
+> Перед началом работы установите `poetry`
+>
+> ```bash
+> pip install poetry
+> ```
+
+### Установить зависимости
+
+Установите зависимости poetry с помощью следующей команды
+
+```bash
+poetry install
 ```
 
-## (B) Running the streamlite app
+### (А) Запуск API Flask
 
-- Before running the streamlite app make sure you have the following installed
-```
-python = "^3.10"
-```
-- In the ``/front`` directory add a ``.env`` with the following fields
-```
-API_ENDPOINT=http://localhost:5000 # or the flask API url
-```
-- Install required dependencies 
-```
-pip install -r requirements.txt
-```
-- Run streamlite app
-```
-streamlit run .\main.py
-```
+#### (1) Запуск API с использованием модели Llama от hugging face
+
+- В каталог `./back` добавьте файл `.env` со следующими полями
+
+  ```bash
+  API_TOKEN="ваш api-токен от hugging face"
+  API_URL="https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-3B-Instruct"
+  ```
+
+- Вы можете получить бесплатный токен доступа к hugging face здесь [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+
+- Запустите API с помощью
+
+  ```bash
+  poetry run flask run
+  ```
+
+- или
+
+  ```bash
+  python app/py
+  ```
+
+#### (2) Запуск API с локальной моделью
+
+- Чтобы запустить API и модель локально, загрузите файлы модели llama 3.2 с веб-сайта [https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct](https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct)
+- Убедитесь, что у вас установлены трансформаторы и pytorch:
+
+  ```bash
+  poetry add transformers torch flask
+  ```
+
+- Чтобы запустить модель локально, внесите следующие изменения в функцию инициализации модели
+
+  ```bash
+  MODEL_NAME = "your_model_name_here"  # Заменить на название модели с Hugging Face, например, "facebook/llama-7b".
+  tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+  model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
+
+  def query_huggingface(payload):
+      inputs = tokenizer(payload["inputs"], return_tensors="pt")
+      outputs = model.generate(**inputs, max_length=700)
+      result = tokenizer.decode(outputs[0], skip_special_tokens=True)
+      return {"generated_text": result}
+  ```
+
+- Запустите приложение flask
+
+  ```bash
+  poetry run flask run
+  ```
+
+### (B) Запуск приложения streamlit
+
+- В каталоге `./front` добавьте файл `.env` со следующими полями
+
+  ```bash
+  API_ENDPOINT=http://localhost:5000 # или URL-адрес flask API
+  ```
+
+- Запустите приложение streamlit
+
+  ```bash
+  streamlit run main.py
+  ```
