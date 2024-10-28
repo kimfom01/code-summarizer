@@ -16,14 +16,19 @@ def start_analysis(source_code):
             json={"code": source_code},
             headers={"Content-Type": "application/json"},
         )
-
-        post = resp.json()
         if resp.status_code == 200:
-            st.write("Analysis:")
-            st.write(post["result"])
+            posts = resp.json()
+            summary = posts[0]["summary"]
+            description = posts[1]["description"]
+            st.write("Summary:")
+            st.write(summary)
+            st.write("Description:")
+            st.write(description)
         else:
-            st.write(post["error"])
+            print(posts)
+            st.write(posts["error"])
     except Exception as ex:
+        print(str(ex))
         st.write(str(ex))
 
 
