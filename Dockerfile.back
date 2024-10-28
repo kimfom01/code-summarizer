@@ -1,5 +1,4 @@
 FROM python:3.11-slim AS release
-EXPOSE 5000
 
 WORKDIR /app
 
@@ -21,6 +20,8 @@ COPY poetry.lock .
 
 RUN poetry install
 
-COPY . .
+COPY back .
+
+EXPOSE 5000
 
 ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]

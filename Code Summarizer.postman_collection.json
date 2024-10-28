@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "7fcfd8ff-90b3-4e98-ae48-1cb157758c9c",
-		"name": "Analyse Code request example",
+		"_postman_id": "84d00c6b-9734-4120-aae5-823eee253cca",
+		"name": "Code Summarizer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19593119"
+		"_exporter_id": "29631250"
 	},
 	"item": [
 		{
-			"name": "http://127.0.0.1:5000/analyse",
+			"name": "Analyse Code",
 			"request": {
 				"method": "POST",
 				"header": [],

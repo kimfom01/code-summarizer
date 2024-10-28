@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "code-summarizer-api"
 version = "0.1.0"
-description = ""
+description = "Codebase for Code Summarizer"
 authors = ["Suwi-inc <suwilanjisilwamba@gmail.com>"]
 readme = "README.md"
 
@@ -11,6 +11,7 @@ flask = "^3.0.3"
 python-dotenv = "^1.0.1"
 requests = "^2.32.3"
 gunicorn = "^23.0.0"
+streamlit = "^1.39.0"
 
 
 [build-system]
