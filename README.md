@@ -1,7 +1,15 @@
 # Code Summarizer
 
 - [English Instructions](#running-the-project)
+  - [Requirements](#requirements)
+  - [Running the Flask API](#a-running-the-flask-api)
+  - [Running the streamlit app](#b-running-the-streamlit-app)
+  - [Docker](#c-docker)
 - [Документация на Русском](#запуск-проекта)
+  - [Требования](#требования)
+  - [Запуск API Flask](#а-запуск-api-flask)
+  - [Запуск приложения streamlit](#b-запуск-приложения-streamlit)
+  - [Докер](#c-докер)
 
 ## Running the project
 
@@ -15,7 +23,7 @@
 > pip install poetry
 > ```
 
-### Install dependencies
+#### Install dependencies
 
 Install poetry dependencies using the following command
 
@@ -77,7 +85,7 @@ poetry install
   poetry run flask run
   ```
 
-### (B) Running the streamlite app
+### (B) Running the streamlit app
 
 - In the `./front` directory add a `.env` with the following fields
 
@@ -91,9 +99,23 @@ poetry install
   streamlit run main.py
   ```
 
+- Open the web app on [http://localhost:8501](http://localhost:8501)
+
+### (C) Docker
+
+- Make sure you have have set the `.env` file in `./back` directory ([see instruction](#1-set-api-token-for-llama-model))
+
+- Run the docker compose command
+
+  ```bash
+  docker compose up --build
+  ```
+
+- Open the web app on [http://localhost:8501](http://localhost:8501)
+
 ## Запуск проекта
 
-## Требования
+### Требования
 
 - `Python 3.11`
 
@@ -103,7 +125,7 @@ poetry install
 > pip install poetry
 > ```
 
-### Установить зависимости
+#### Установить зависимости
 
 Установите зависимости poetry с помощью следующей команды
 
@@ -178,3 +200,17 @@ poetry install
   ```bash
   streamlit run main.py
   ```
+
+- Откройте веб-приложение на [http://localhost:8501](http://localhost:8501)
+
+### (C) Докер
+
+- Убедитесь, что вы установили файл `.env` в каталог `./back` [вот инструкция](#1-запуск-api-с-использованием-модели-llama-от-hugging-face)
+
+- Запустите команду docker compose
+
+  ```bash
+  docker compose up --build
+  ```
+
+- Откройте веб-приложение на [http://localhost:8501](http://localhost:8501)
